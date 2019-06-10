@@ -4,10 +4,12 @@
        @click="openOptions"
        @focus="openOptions">
     <i class="dropdown icon"></i>
-    <template v-for="(option, idx) in selectedOptions" v-if="!hideSelectedOptions">
-      <a class="ui label transition visible"
-         style="display: inline-block !important;"
-         :data-vss-custom-attr="customAttr(option)">
+    <template v-if="!hideSelectedOptions">
+      <a v-for="(option, idx) in selectedOptions" 
+          class="ui label transition visible"
+          style="display: inline-block !important;"
+          :data-vss-custom-attr="customAttr(option)"
+          :key="idx">
         {{option.text}}<i class="delete icon" @click="deleteItem(option)"></i>
       </a>
     </template>
@@ -22,11 +24,11 @@
            @focus.prevent="openOptions"
            @keyup.esc="closeOptions"
            @blur="blurInput"
+           @keydown="openOptions"
            @keydown.up="prevItem"
            @keydown.down="nextItem"
            @keydown.enter.prevent=""
            @keyup.enter.prevent="enterItem"
-           @keydown.delete="deleteTextOrLastItem"
     />
     <div class="text"
          :class="textClass">{{inputText}}
@@ -43,7 +45,8 @@
              :data-vss-custom-attr="customAttr(option)"
              @click.stop="selectItem(option)"
              @mousedown="mousedownItem"
-             @mouseenter="pointerSet(idx)">
+             @mouseenter="pointerSet(idx)"
+             :key="idx">
           {{option.text}}
         </div>
       </template>
