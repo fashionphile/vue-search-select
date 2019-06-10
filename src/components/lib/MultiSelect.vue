@@ -147,7 +147,6 @@ export default {
       }
     },
     openOptions () {
-      console.log('openOptions')
       common.openOptions(this)
     },
     blurInput () {
@@ -167,7 +166,6 @@ export default {
       this.openOptions()
     },
     enterItem () {
-      console.log('enterItem')
       common.enterItem(this)
     },
     pointerSet (index) {
